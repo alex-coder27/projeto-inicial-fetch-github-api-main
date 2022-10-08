@@ -10,6 +10,10 @@ const screen = {
                                             <p>👤 seguindo ${user.following} pessoas </p>
                                         </div>
                                     </div>`
+        this.renderRepositories(user)
+        this.renderEvents(user)
+    },
+    renderRepositories(user) {
         let repositoriesItens = ''
         user.repositories.forEach(repo => repositoriesItens += `<li>
                                                                     <a href="${repo.html_url}" targer="_blank">${repo.name}</a>
@@ -28,15 +32,16 @@ const screen = {
                                                 <ul>${repositoriesItens}</ul>
                                             </div>`
         }
-
+    },
+    renderEvents(user) {
         let eventsItens = ''
         user.events.forEach(event => eventsItens += `<li>
                                                         <p>${event.repo.name}</p>
-                                                        <p>${event.payload.commits ? event.payload.commits[0].message: ''}</p>
+                                                        <p>${event.payload.commits ? event.payload.commits[0].message : ''}</p>
                                                     </li>`
         )
 
-        
+
         if (user.events.length > 0) {
             this.userProfile.innerHTML += `<div class="events">
                                                 <h2>Eventos</h2>
